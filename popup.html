@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>CivitAI Model Creator</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <h1 id="appTitle">🎨 CivitAI Model Creator</h1>
+  </div>
+  
+  <div class="tabs">
+    <button class="tab active" data-tab="form" id="tabForm">Form</button>
+    <button class="tab" data-tab="json" id="tabJson">JSON</button>
+  </div>
+  
+  <div id="form-tab" class="tab-content active">
+    <form id="modelForm">
+      <div class="form-group">
+        <label>Model Name *</label>
+        <input type="text" id="name" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Description</label>
+        <textarea id="description" rows="3"></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label>Type *</label>
+        <select id="type">
+          <option value="LORA">LORA</option>
+          <option value="Checkpoint">Checkpoint</option>
+          <option value="TextualInversion">Textual Inversion</option>
+          <option value="Hypernetwork">Hypernetwork</option>
+          <option value="AestheticGradient">Aesthetic Gradient</option>
+          <option value="Controlnet">ControlNet</option>
+          <option value="Poses">Poses</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Tags (comma-separated)</label>
+        <input type="text" id="tags" placeholder="anime, pokemon, nintendo">
+        <div class="help-text">Enter tag names separated by commas</div>
+      </div>
+      
+      <input type="hidden" id="uploadType" value="Created">
+      <input type="hidden" id="status" value="Draft">
+      <input type="hidden" id="userId">
+      
+      <div class="form-group">
+        <div class="checkbox-array">
+          <div class="checkbox-group">
+            <input type="checkbox" id="allowNoCredit">
+            <label for="allowNoCredit" id="labelAllowNoCredit">Use without crediting me</label>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="allowDerivatives">
+            <label for="allowDerivatives" id="labelAllowDerivatives">Share merges of this model</label>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="allowDifferentLicense">
+            <label for="allowDifferentLicense" id="labelAllowDifferentLicense">Use different permissions on merges</label>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="nsfw">
+            <label for="nsfw" id="labelNsfw">Is intended to produce mature themes</label>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="requireAuth">
+            <label for="requireAuth" id="labelRequireAuth">Require Auth</label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label id="labelCommercialUse">Commercial Use</label>
+        <div class="checkbox-array">
+          <div class="checkbox-group">
+            <input type="checkbox" id="commercialImage" value="Image">
+            <label for="commercialImage" id="labelCommercialImage">Sell generated images</label>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="commercialRentCivit" value="RentCivit">
+            <label for="commercialRentCivit" id="labelCommercialRentCivit">Use on Civitai generation service</label>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="commercialRent" value="Rent">
+            <label for="commercialRent" id="labelCommercialRent">Use on other generation services</label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Template ID</label>
+        <input type="text" id="templateId">
+        <div class="help-text" id="helpTemplateId">Use a template ID to auto populate base model field on the step 2 page.</div>
+      </div>
+      
+      <div class="form-group">
+        <label>Showcase Collection ID</label>
+        <input type="text" id="showcaseCollectionId">
+      </div>
+      
+      <button type="submit" class="primary" id="createFromForm">Create Model on CivitAI</button>
+      <div class="status" id="formStatus"></div>
+    </form>
+  </div>
+  
+  <div id="json-tab" class="tab-content">
+    <div class="help-text" id="jsonHelpText">
+      Paste your JSON payload below, then click "Load to Form" to populate the form fields.
+    </div>
+    <textarea id="jsonPayload" class="json-input" placeholder='Paste your model payload JSON here...'></textarea>
+    <button id="loadFromJson" class="secondary">Load to Form</button>
+    <button id="createFromJson" class="primary">Create Model from JSON</button>
+    <div class="status" id="jsonStatus"></div>
+  </div>
+  
+  <div class="footer">
+    Created by Citron Legacy - <a href="https://github.com/citronlegacy/CivitAI-Model-Post-Creator" target="_blank">https://github.com/citronlegacy/CivitAI-Model-Post-Creator</a>
+  </div>
+  
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
